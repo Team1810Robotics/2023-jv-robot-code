@@ -29,8 +29,9 @@ public class RobotContainer {
   public RobotContainer() {
     driveSubsystem.setDefaultCommand(
       new TankDrive(
-        () -> leftJoystick.getY(), 
-        () -> rightJoystick.getY(), 
+        //TODO:Make sure the negatives here work.
+        () -> -leftJoystick.getY(), 
+        () -> -rightJoystick.getY(), 
         driveSubsystem)
     );
     // Configure the trigger bindings
