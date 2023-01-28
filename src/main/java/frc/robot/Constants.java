@@ -30,6 +30,8 @@ public final class Constants {
     public static final int BACK_RIGHT_MOTOR_ID = 3;
     public static final boolean RIGHT_INVERTED = false;
 
+    public static final int PIGEON = 4;
+
     public static final double DEADBAND = 0.05;
   }
 }
