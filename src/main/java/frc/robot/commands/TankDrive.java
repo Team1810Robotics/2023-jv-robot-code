@@ -28,6 +28,7 @@ public class TankDrive extends CommandBase {
         deadband(rightInput.getAsDouble()));
     }
 
+    //Ignores values from the controller that are less than the deadband.
     public double deadband(double value) {
         if (Math.abs(value) >= DriveConstants.DEADBAND) {
             return (value - DriveConstants.DEADBAND) / (1 - DriveConstants.DEADBAND);
