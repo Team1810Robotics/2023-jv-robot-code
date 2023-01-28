@@ -5,9 +5,40 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveSubsystem;
 
+import frc.robot.Constants.*;
+
 public class TankDrive extends CommandBase {
     
-    private final DoubleSupplier leftInput;
-    private final DoubleSupplier rightInput;
-    private final DriveSubsystem driveSubsystem;
+    private DoubleSupplier leftInput;
+    private DoubleSupplier rightInput;
+    private DriveSubsystem driveSubsystem;
+
+    
+    public TankDrive(DoubleSupplier leftInput, DoubleSupplier rightInput, DriveSubsystem driveSubsystem) {
+        this.leftInput = leftInput;
+        this.rightInput = rightInput;
+        this.driveSubsystem = driveSubsystem;
+
+        addRequirements(driveSubsystem);
+    }
+    @Override
+    public void execute(){
+        driveSubsystem.drive
+        (deadband(leftInput.getAsDouble()), 
+        deadband(rightInput.getAsDouble()));
+    }
+
+    //Ignores values from the controller that are less than the deadband.
+    public double deadband(double value) {
+        if (Math.abs(value) >= DriveConstants.DEADBAND) {
+            return (value - DriveConstants.DEADBAND) / (1 - DriveConstants.DEADBAND);
+        }
+
+        return 0;
+    }
+
+    @Override
+    public void end(boolean interrupted){
+        driveSubsystem.stop();
+    }
 }

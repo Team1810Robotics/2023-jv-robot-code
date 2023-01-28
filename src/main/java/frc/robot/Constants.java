@@ -14,11 +14,22 @@ package frc.robot;
  */
 public final class Constants {
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+
+    public static final int LEFT_JOYSTICK_PORT = 0;
+    public static final int RIGHT_JOYSTICK_PORT = 1;
+    public static final int kDriverControllerPort = 2;
   }
 
   public static class DriveConstants {
-    public static final int LEFT_MOTOR_ID = 0;
-    public static final int RIGHT_MOTOR_ID = 1;
+    //TODO: Finalize drive constants
+    public static final int FRONT_LEFT_MOTOR_ID = 0;
+    public static final int BACK_LEFT_MOTOR_ID = 1;
+    public static final boolean LEFT_INVERTED = true;
+
+    public static final int FRONT_RIGHT_MOTOR_ID = 2;
+    public static final int BACK_RIGHT_MOTOR_ID = 3;
+    public static final boolean RIGHT_INVERTED = false;
+
+    public static final double DEADBAND = 0.05;
   }
 }
