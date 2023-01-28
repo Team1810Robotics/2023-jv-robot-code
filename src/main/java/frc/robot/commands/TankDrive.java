@@ -32,7 +32,8 @@ public class TankDrive extends CommandBase {
         if (Math.abs(value) <= DriveConstants.DEADBAND){
             return 0;
         } else {
-            return value;
+            //TODO: Flip if necessary.
+            return (value / DriveConstants.DEADBAND - 1);
         }
     }
 
