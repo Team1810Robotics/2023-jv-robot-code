@@ -27,14 +27,13 @@ public class TankDrive extends CommandBase {
         (deadband(leftInput.getAsDouble()), 
         deadband(rightInput.getAsDouble()));
     }
-    
+
     public double deadband(double value) {
-        if (Math.abs(value) <= DriveConstants.DEADBAND){
-            return 0;
-        } else {
-            //TODO: Flip if necessary.
-            return (value / DriveConstants.DEADBAND - 1);
+        if (Math.abs(value) >= DriveConstants.DEADBAND) {
+            return (value - DriveConstants.DEADBAND) / (1 - DriveConstants.DEADBAND);
         }
+
+        return 0;
     }
 
     @Override
