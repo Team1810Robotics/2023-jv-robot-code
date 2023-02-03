@@ -21,17 +21,24 @@ public final class Constants {
   }
 
   public static class DriveConstants {
-    //TODO: Finalize drive constants
-    public static final int FRONT_LEFT_MOTOR_ID = 0;
-    public static final int BACK_LEFT_MOTOR_ID = 1;
-    public static final boolean LEFT_INVERTED = true;
 
-    public static final int FRONT_RIGHT_MOTOR_ID = 2;
-    public static final int BACK_RIGHT_MOTOR_ID = 3;
-    public static final boolean RIGHT_INVERTED = false;
+    public static final int FRONT_LEFT_MOTOR_ID =    0;
+    public static final int BACK_LEFT_MOTOR_ID =     1;
+    public static final boolean LEFT_INVERTED =      true;
+
+    public static final int FRONT_RIGHT_MOTOR_ID =   2;
+    public static final int BACK_RIGHT_MOTOR_ID =    3;
+    public static final boolean RIGHT_INVERTED =     false;
 
     public static final int PIGEON = 4;
 
     public static final double DEADBAND = 0.05;
+  }
+
+  public static class ArmConstants {
+    //TODO: Make sure these work
+    public static final int EXTENDER_RELAY = 4; 
+    public static final int EXTENDER_LS = 0;
+
   }
 }

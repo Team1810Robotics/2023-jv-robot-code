@@ -11,6 +11,7 @@ import static frc.robot.Constants.*;
 
 public class DriveSubsystem extends SubsystemBase {
     
+    @SuppressWarnings("unused")
     private static final PigeonIMU pigeon = new PigeonIMU(DriveConstants.PIGEON);
     
     private PWMSparkMax frontLeftMotor;
