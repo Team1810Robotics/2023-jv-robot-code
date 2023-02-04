@@ -15,6 +15,8 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
+import frc.robot.subsystems.ClawSubsystem;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -25,6 +27,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private DriveSubsystem driveSubsystem = new DriveSubsystem();
   private ExtenderSubsystem extenderSubsystem = new ExtenderSubsystem();
+  private ClawSubsystem clawSubsystem = new ClawSubsystem();
 
   private final XboxController manipulatorController = new XboxController(OperatorConstants.MANIPULATOR_CONTROLLER_PORT);
 
@@ -32,6 +35,7 @@ public class RobotContainer {
   private Joystick rightJoystick = new Joystick(OperatorConstants.RIGHT_JOYSTICK_PORT);
 
   private final JoystickButton manipulatorXbox_LB = new JoystickButton(manipulatorController, 4);
+  private final JoystickButton manipulatorXbox_RB = new JoystickButton(manipulatorController, 5);
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -58,6 +62,7 @@ public class RobotContainer {
   private void configureBindings() {
     //It needs about tree-fiddy
     manipulatorXbox_LB.onTrue(new InstantCommand(() -> extenderSubsystem.extend()));//TODO: Make sure this works.
+    manipulatorXbox_RB.onTrue(new InstantCommand(() -> clawSubsystem.grab()));
     
   }
 

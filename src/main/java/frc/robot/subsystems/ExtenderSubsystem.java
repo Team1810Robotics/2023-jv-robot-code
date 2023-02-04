@@ -16,12 +16,11 @@ public class ExtenderSubsystem extends SubsystemBase{
         extenderLS = new DigitalInput(ArmConstants.EXTENDER_LS);
     }
 
-    public void extend(){
-        
+    public void extend() {
         if (!extenderLS.get()){
-
             extender.set(Relay.Value.kForward); //TODO: Check to make sure this is ok and won't break.
-
+        } else {
+            extender.stopMotor();
         }
     }
 }
