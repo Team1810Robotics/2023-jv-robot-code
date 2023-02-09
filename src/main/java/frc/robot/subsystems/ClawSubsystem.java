@@ -9,11 +9,11 @@ public class ClawSubsystem extends SubsystemBase {
     public static Relay claw;
     public static DigitalInput clawLS;
     
-    public ClawSubsystem () {
+    public ClawSubsystem() {
         claw = new Relay(ArmConstants.CLAW_RELAY);
         clawLS = new DigitalInput(ArmConstants.CLAW_LS);
     }
-    public void grab () {
+    public void grab() {
         if(!clawLS.get()) {
             claw.set(Relay.Value.kForward);
         } else {
