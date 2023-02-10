@@ -16,7 +16,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     @SuppressWarnings("unused")
     private static final PigeonIMU pigeon = new PigeonIMU(DriveConstants.PIGEON);
-
+    @SuppressWarnings("unused")
     private final DifferentialDriveOdometry odometer;
 
     private PWMSparkMax frontLeftMotor;

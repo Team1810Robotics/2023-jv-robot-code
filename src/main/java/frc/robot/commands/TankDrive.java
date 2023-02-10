@@ -24,8 +24,10 @@ public class TankDrive extends CommandBase {
     @Override
     public void execute(){
         driveSubsystem.drive
-        (deadband(leftInput.getAsDouble()), 
-        deadband(rightInput.getAsDouble()));
+        (
+        deadband(leftInput.getAsDouble()), 
+        trim(deadband(rightInput.getAsDouble()))
+        );
     }
 
     //Ignores values from the controller that are less than the deadband.
@@ -35,6 +37,15 @@ public class TankDrive extends CommandBase {
         }
 
         return 0;
+    }
+
+    public double trim(double value) {
+        if (value > 0) {
+            value += DriveConstants.POSITIVE_TRIM;
+        } else if (value < 0) {
+            value += DriveConstants.NEGATIVE_TRIM;
+        }
+        return value;
     }
 
     @Override
