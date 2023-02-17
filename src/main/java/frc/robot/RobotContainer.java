@@ -42,7 +42,6 @@ public class RobotContainer {
   public RobotContainer() {
     driveSubsystem.setDefaultCommand(
       new TankDrive(
-        //TODO:Make sure the negatives here work.
         () -> -leftJoystick.getY(), 
         () -> -rightJoystick.getY(), 
         driveSubsystem)
@@ -61,8 +60,7 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    //It needs about tree-fiddy
-    manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem)); // TODO: Make sure this works.
+    manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem));
     manipulatorXbox_RB.onTrue(new Claw(clawSubsystem));
   }
 
