@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Extender;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
@@ -34,8 +35,8 @@ public class RobotContainer {
   private Joystick leftJoystick = new Joystick(OperatorConstants.LEFT_JOYSTICK_PORT);
   private Joystick rightJoystick = new Joystick(OperatorConstants.RIGHT_JOYSTICK_PORT);
 
-  private final JoystickButton manipulatorXbox_LB = new JoystickButton(manipulatorController, 4);
-  private final JoystickButton manipulatorXbox_RB = new JoystickButton(manipulatorController, 5);
+  private final JoystickButton manipulatorXbox_LB = new JoystickButton(manipulatorController, 5);
+  private final JoystickButton manipulatorXbox_RB = new JoystickButton(manipulatorController, 6);
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -61,9 +62,8 @@ public class RobotContainer {
    */
   private void configureBindings() {
     //It needs about tree-fiddy
-    manipulatorXbox_LB.onTrue(new InstantCommand(() -> extenderSubsystem.extend()));//TODO: Make sure this works.
+    manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem)); // TODO: Make sure this works.
     manipulatorXbox_RB.onTrue(new InstantCommand(() -> clawSubsystem.grab()));
-    
   }
 
   /**

@@ -26,23 +26,16 @@ public class DriveSubsystem extends SubsystemBase {
     private PWMSparkMax backRightMotor;
 
     private MotorControllerGroup rightDrive;
-
     private MotorControllerGroup leftDrive;
 
     private DifferentialDrive differentialDrive;
 
     public DriveSubsystem() {
         frontLeftMotor = new PWMSparkMax(DriveConstants.FRONT_LEFT_MOTOR_ID);
-        //.setInverted(DriveConstants.LEFT_INVERTED);
+        frontRightMotor = new PWMSparkMax(DriveConstants.FRONT_RIGHT_MOTOR_ID);
 
         backLeftMotor = new PWMSparkMax(DriveConstants.BACK_LEFT_MOTOR_ID);
-        //backLeftMotor.setInverted(DriveConstants.LEFT_INVERTED);
-
-        frontRightMotor = new PWMSparkMax(DriveConstants.FRONT_RIGHT_MOTOR_ID);
-        //frontRightMotor.setInverted(DriveConstants.RIGHT_INVERTED);
-
         backRightMotor = new PWMSparkMax(DriveConstants.BACK_RIGHT_MOTOR_ID);
-        //backRightMotor.setInverted(DriveConstants.RIGHT_INVERTED);
 
         leftDrive = new MotorControllerGroup(frontLeftMotor, backLeftMotor);
         leftDrive.setInverted(DriveConstants.LEFT_INVERTED);
