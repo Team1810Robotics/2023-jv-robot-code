@@ -40,10 +40,8 @@ public final class Constants {
   }
 
   public static class ArmConstants {
-    //TODO: Make sure these work
     public static final int EXTENDER_RELAY = 1; 
     public static final int EXTENDER_LS = 1;
-    //public static final int[] EXTENDER_ENCODER_PORTS = {0,1}; //TODO: Correct the port numbers
 
     public static final int CLAW_RELAY = 2;
     public static final int CLAW_LS = 0;

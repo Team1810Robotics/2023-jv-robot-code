@@ -14,10 +14,10 @@ public class ClawSubsystem extends SubsystemBase {
         clawLS = new DigitalInput(ArmConstants.CLAW_LS);
     }
     public void grab() {
-        if(!clawLS.get()) {
-            claw.set(Relay.Value.kForward);
-        } else {
-            claw.stopMotor();
-        }
+        claw.set(Relay.Value.kForward);
+    }
+
+    public void stop() {
+        claw.stopMotor();
     }
 }
