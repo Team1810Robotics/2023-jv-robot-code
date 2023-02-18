@@ -4,6 +4,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.Encoder;
 //import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -30,6 +31,9 @@ public class DriveSubsystem extends SubsystemBase {
 
     private DifferentialDrive differentialDrive;
 
+    private Encoder leftEncoder;
+    private Encoder rightEncoder;
+
     public DriveSubsystem() {
         frontLeftMotor = new PWMSparkMax(DriveConstants.FRONT_LEFT_MOTOR_ID);
         frontRightMotor = new PWMSparkMax(DriveConstants.FRONT_RIGHT_MOTOR_ID);
@@ -45,7 +49,12 @@ public class DriveSubsystem extends SubsystemBase {
 
         differentialDrive = new DifferentialDrive(leftDrive, rightDrive);
 
-        odometer = new DifferentialDriveOdometry(new Rotation2d(), 0, 0);
+        leftEncoder = new Encoder(0, 1);
+        rightEncoder = new Encoder(2, 3);
+
+        pigeon.setFusedHeading(0.0);
+
+        odometer = new DifferentialDriveOdometry(pigeon.getYaw(), 0, 0); //TODO:getYaw needs to be changed to a Rotation2D
     }
 
     public void drive(double leftSpeed, double rightSpeed) {
