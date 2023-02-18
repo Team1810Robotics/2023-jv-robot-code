@@ -12,26 +12,38 @@ package frc.robot;
  * <p>It is advised to statically import this class (or one of its inner classes) wherever the
  * constants are needed, to reduce verbosity.
  */
+//https://www.pbs.org/wnet/nature/files/2014/10/Monkey-Main-1280x600.jpg
 public final class Constants {
   public static class OperatorConstants {
 
     public static final int LEFT_JOYSTICK_PORT = 0;
     public static final int RIGHT_JOYSTICK_PORT = 1;
-    public static final int kDriverControllerPort = 2;
+    public static final int MANIPULATOR_CONTROLLER_PORT = 2;
   }
 
   public static class DriveConstants {
-    //TODO: Finalize drive constants
-    public static final int FRONT_LEFT_MOTOR_ID = 0;
-    public static final int BACK_LEFT_MOTOR_ID = 1;
-    public static final boolean LEFT_INVERTED = true;
 
-    public static final int FRONT_RIGHT_MOTOR_ID = 2;
-    public static final int BACK_RIGHT_MOTOR_ID = 3;
-    public static final boolean RIGHT_INVERTED = false;
+    public static final int FRONT_LEFT_MOTOR_ID =    0;
+    public static final int BACK_LEFT_MOTOR_ID =     1;
+    public static final boolean LEFT_INVERTED =      true;
+
+    public static final int FRONT_RIGHT_MOTOR_ID =   2;
+    public static final int BACK_RIGHT_MOTOR_ID =    3;
+    public static final boolean RIGHT_INVERTED =     false;
 
     public static final int PIGEON = 4;
 
     public static final double DEADBAND = 0.05;
+
+    public static final double POSITIVE_TRIM = 0;
+    public static final double NEGATIVE_TRIM = 0;
+  }
+
+  public static class ArmConstants {
+    public static final int EXTENDER_RELAY = 1; 
+    public static final int EXTENDER_LS = 1;
+
+    public static final int CLAW_RELAY = 2;
+    public static final int CLAW_LS = 0;
   }
 }

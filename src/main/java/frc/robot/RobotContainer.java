@@ -5,13 +5,19 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.Claw;
+import frc.robot.commands.Extender;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.ExtenderSubsystem;
+import frc.robot.subsystems.ClawSubsystem;
 
-import static frc.robot.Constants.*;
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -21,15 +27,21 @@ import static frc.robot.Constants.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private DriveSubsystem driveSubsystem = new DriveSubsystem();
+  private ExtenderSubsystem extenderSubsystem = new ExtenderSubsystem();
+  private ClawSubsystem clawSubsystem = new ClawSubsystem();
+
+  private final XboxController manipulatorController = new XboxController(OperatorConstants.MANIPULATOR_CONTROLLER_PORT);
 
   private Joystick leftJoystick = new Joystick(OperatorConstants.LEFT_JOYSTICK_PORT);
   private Joystick rightJoystick = new Joystick(OperatorConstants.RIGHT_JOYSTICK_PORT);
+
+  private final JoystickButton manipulatorXbox_LB = new JoystickButton(manipulatorController, 5);
+  private final JoystickButton manipulatorXbox_RB = new JoystickButton(manipulatorController, 6);
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveSubsystem.setDefaultCommand(
       new TankDrive(
-        //TODO:Make sure the negatives here work.
         () -> -leftJoystick.getY(), 
         () -> -rightJoystick.getY(), 
         driveSubsystem)
@@ -48,10 +60,8 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
+    manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem));
+    manipulatorXbox_RB.onTrue(new Claw(clawSubsystem));
   }
 
   /**
