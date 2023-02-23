@@ -15,9 +15,9 @@ import static frc.robot.Constants.*;
 
 public class DriveSubsystem extends SubsystemBase {
 
-    @SuppressWarnings("unused")
+
     private static final PigeonIMU pigeon = new PigeonIMU(DriveConstants.PIGEON);
-    @SuppressWarnings("unused")
+
     private final DifferentialDriveOdometry odometer;
 
     private PWMSparkMax frontLeftMotor;
@@ -32,6 +32,7 @@ public class DriveSubsystem extends SubsystemBase {
     private DifferentialDrive differentialDrive;
 
     private Encoder leftEncoder;
+
     private Encoder rightEncoder;
 
     public DriveSubsystem() {
@@ -54,7 +55,7 @@ public class DriveSubsystem extends SubsystemBase {
 
         pigeon.setFusedHeading(0.0);
 
-        odometer = new DifferentialDriveOdometry(pigeon.getYaw(), 0, 0); //TODO:getYaw needs to be changed to a Rotation2D
+        odometer = new DifferentialDriveOdometry(new Rotation2d(), 0, 0);
     }
 
     public void drive(double leftSpeed, double rightSpeed) {
@@ -70,6 +71,6 @@ public class DriveSubsystem extends SubsystemBase {
     public void periodic() {
         //double leftAvg = 
 
-        //odometer.update(pigeon.getYaw(),);
+        odometer.update(pigeon.getYaw(),);
     }
 }
