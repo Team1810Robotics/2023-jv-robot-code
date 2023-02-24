@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.sensors.PigeonIMU;
 
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.Encoder;
@@ -62,6 +63,10 @@ public class DriveSubsystem extends SubsystemBase {
         differentialDrive.tankDrive(leftSpeed, rightSpeed, true);
     }
 
+    public Pose2d getPose(){
+        return odometer.getPoseMeters();
+    }
+    //TODO: Consider making a resetOdometry method
     public void stop() {
         leftDrive.set(0);
         rightDrive.set(0);
@@ -69,8 +74,6 @@ public class DriveSubsystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        //double leftAvg = 
-
-        //odometer.update(pigeon.getYaw(),);
+        odometer.update(Rotation2d.fromDegrees(pigeon.getYaw()), leftEncoder.getDistance(), rightEncoder.getDistance());
     }
 }
