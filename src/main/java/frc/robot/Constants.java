@@ -37,6 +37,10 @@ public final class Constants {
 
     public static final double POSITIVE_TRIM = 0;
     public static final double NEGATIVE_TRIM = 0;
+
+    public static final int SERVO_1 = 1; //TODO: Correct these values 
+    public static final int SERVO_2 = 2;
+
   }
 
   public static class ArmConstants {
