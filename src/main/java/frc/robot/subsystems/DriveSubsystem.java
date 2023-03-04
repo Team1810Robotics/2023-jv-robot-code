@@ -106,6 +106,14 @@ public class DriveSubsystem extends SubsystemBase {
         rightDrive.set(0);
     }
 
+    public void gearShift() {
+        if (servo1.get() > .79){ //.79 and .21 are arbitrary numbers I made up (assuming this woks the way I hope)
+            //Shift up 
+        } else if (servo1.get() < .21) {
+            //Shift down
+        }
+    }
+
     
     @Override
     public void periodic() {
