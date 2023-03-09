@@ -106,15 +106,16 @@ public class DriveSubsystem extends SubsystemBase {
         rightDrive.set(0);
     }
 
-    public void gearShift() {
-        if (servo1.get() > .79){ //.79 and .21 are arbitrary numbers I made up (assuming this woks the way I hope)
-            //Shift up 
-        } else if (servo1.get() < .21) {
-            //Shift down
-        }
+    public void shiftUp() {
+        servo1.setAngle(90);
+        servo2.setAngle(90);
     }
 
-    
+    public void shiftDown() {
+        servo1.setAngle(0);
+        servo2.setAngle(0);
+    }
+
     @Override
     public void periodic() {
         odometer.update(Rotation2d.fromDegrees(pigeon.getYaw()), leftEncoder.getDistance(), rightEncoder.getDistance());

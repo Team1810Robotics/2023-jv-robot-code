@@ -37,7 +37,9 @@ public class RobotContainer {
 
   private final JoystickButton manipulatorXbox_LB = new JoystickButton(manipulatorController, 5);
   private final JoystickButton manipulatorXbox_RB = new JoystickButton(manipulatorController, 6);
-  
+  private final JoystickButton manipulatorXbox_AButton = new JoystickButton(manipulatorController, 1);
+  private final JoystickButton manipulatorXbox_XButton = new JoystickButton(manipulatorController, 3);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveSubsystem.setDefaultCommand(
@@ -62,6 +64,9 @@ public class RobotContainer {
   private void configureBindings() {
     manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem));
     manipulatorXbox_RB.onTrue(new Claw(clawSubsystem));
+    //manipulatorXbox_AButton.onTrue(driveSubsystem.shiftUp()); //TODO: Joysticks?
+    //manipulatorXbox_XButton.onTrue(driveSubsystem.shiftDown());
+
   }
 
   /**
