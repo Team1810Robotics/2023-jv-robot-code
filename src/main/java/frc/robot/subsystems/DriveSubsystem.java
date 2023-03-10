@@ -44,8 +44,7 @@ public class DriveSubsystem extends SubsystemBase {
 
     private Encoder rightEncoder;
 
-    private Servo servo1;
-    private Servo servo2;
+    private Servo shiftServo;
 
 
     public DriveSubsystem() {
@@ -71,8 +70,7 @@ public class DriveSubsystem extends SubsystemBase {
 
         odometer = new DifferentialDriveOdometry(new Rotation2d(), 0, 0);
 
-        servo1 = new Servo(DriveConstants.SERVO_1);
-        servo2 = new Servo(DriveConstants.SERVO_2);
+        shiftServo = new Servo(DriveConstants.SHIFT_SERVO);
 
     }
 
@@ -106,15 +104,17 @@ public class DriveSubsystem extends SubsystemBase {
         rightDrive.set(0);
     }
 
-    public void shiftUp() {
-        servo1.setAngle(90);
-        servo2.setAngle(90);
+    public double shiftUp() {
+        shiftServo.setAngle(180);
+        return shiftServo.getAngle();
+        
     }
 
-    public void shiftDown() {
-        servo1.setAngle(0);
-        servo2.setAngle(0);
+    public double shiftDown() {
+        shiftServo.setAngle(0);
+        return shiftServo.getAngle();
     }
+
 
     @Override
     public void periodic() {
