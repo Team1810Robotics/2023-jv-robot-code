@@ -13,10 +13,13 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Claw;
 import frc.robot.commands.Extender;
+import frc.robot.commands.GearShift;
 import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.GearShiftSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,15 +32,18 @@ public class RobotContainer {
   private DriveSubsystem driveSubsystem = new DriveSubsystem();
   private ExtenderSubsystem extenderSubsystem = new ExtenderSubsystem();
   private ClawSubsystem clawSubsystem = new ClawSubsystem();
+  private GearShiftSubsystem gearShiftSubsystem = new GearShiftSubsystem();
 
   private final XboxController manipulatorController = new XboxController(OperatorConstants.MANIPULATOR_CONTROLLER_PORT);
 
-  private Joystick leftJoystick = new Joystick(OperatorConstants.LEFT_JOYSTICK_PORT);
-  private Joystick rightJoystick = new Joystick(OperatorConstants.RIGHT_JOYSTICK_PORT);
+  public static Joystick leftJoystick = new Joystick(OperatorConstants.LEFT_JOYSTICK_PORT);
+  public static Joystick rightJoystick = new Joystick(OperatorConstants.RIGHT_JOYSTICK_PORT);
 
   private final JoystickButton manipulatorXbox_LB = new JoystickButton(manipulatorController, 5);
   private final JoystickButton manipulatorXbox_RB = new JoystickButton(manipulatorController, 6);
-  
+  public static final JoystickButton leftJoystickTrigger = new JoystickButton(leftJoystick, 1);
+  public static final JoystickButton rightJoystickTrigger = new JoystickButton(leftJoystick, 1);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveSubsystem.setDefaultCommand(
@@ -62,6 +68,9 @@ public class RobotContainer {
   private void configureBindings() {
     manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem));
     manipulatorXbox_RB.onTrue(new Claw(clawSubsystem));
+    rightJoystickTrigger.onTrue(new GearShift(gearShiftSubsystem, "up")); //TODO: Joysticks?
+    leftJoystickTrigger.onTrue(new GearShift(gearShiftSubsystem, "down"));
+
   }
 
   /**

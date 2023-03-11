@@ -59,11 +59,13 @@ public class DriveSubsystem extends SubsystemBase {
         differentialDrive = new DifferentialDrive(leftDrive, rightDrive);
 
         leftEncoder = new Encoder(0, 1);
+
         rightEncoder = new Encoder(2, 3);
 
         pigeon.setFusedHeading(0.0);
 
         odometer = new DifferentialDriveOdometry(new Rotation2d(), 0, 0);
+
     }
 
     public void drive(double leftSpeed, double rightSpeed) {
