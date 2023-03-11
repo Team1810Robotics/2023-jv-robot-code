@@ -46,7 +46,7 @@ public final class Constants {
     public static final int EXTENDER_RELAY = 1; 
     public static final int EXTENDER_LS = 1;
 
-    public static final int CLAW_RELAY = 2;
+    public static final int CLAW_RELAY = 5;
     public static final int CLAW_LS = 0;
   }
 }

@@ -59,7 +59,7 @@ public class DriveSubsystem extends SubsystemBase {
         differentialDrive = new DifferentialDrive(leftDrive, rightDrive);
 
         leftEncoder = new Encoder(0, 1);
-        
+
         rightEncoder = new Encoder(2, 3);
 
         pigeon.setFusedHeading(0.0);
