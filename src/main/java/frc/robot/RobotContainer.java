@@ -18,6 +18,8 @@ import frc.robot.commands.TankDrive;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.GearShiftSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,6 +32,7 @@ public class RobotContainer {
   private DriveSubsystem driveSubsystem = new DriveSubsystem();
   private ExtenderSubsystem extenderSubsystem = new ExtenderSubsystem();
   private ClawSubsystem clawSubsystem = new ClawSubsystem();
+  private GearShiftSubsystem gearShiftSubsystem = new GearShiftSubsystem();
 
   private final XboxController manipulatorController = new XboxController(OperatorConstants.MANIPULATOR_CONTROLLER_PORT);
 
@@ -65,8 +68,8 @@ public class RobotContainer {
   private void configureBindings() {
     manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem));
     manipulatorXbox_RB.onTrue(new Claw(clawSubsystem));
-    rightJoystickTrigger.onTrue(new GearShift(driveSubsystem)); //TODO: Joysticks?
-    rightJoystickTrigger.onTrue(new GearShift(driveSubsystem));
+    rightJoystickTrigger.onTrue(new GearShift(gearShiftSubsystem, "up")); //TODO: Joysticks?
+    leftJoystickTrigger.onTrue(new GearShift(gearShiftSubsystem, "down"));
 
   }
 

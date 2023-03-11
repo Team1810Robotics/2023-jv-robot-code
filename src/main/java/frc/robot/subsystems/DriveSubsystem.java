@@ -10,7 +10,6 @@ import edu.wpi.first.math.trajectory.TrajectoryUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.Servo;
 //import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -44,9 +43,6 @@ public class DriveSubsystem extends SubsystemBase {
 
     private Encoder rightEncoder;
 
-    private Servo shiftServo;
-
-
     public DriveSubsystem() {
         frontLeftMotor = new PWMSparkMax(DriveConstants.FRONT_LEFT_MOTOR_ID);
         frontRightMotor = new PWMSparkMax(DriveConstants.FRONT_RIGHT_MOTOR_ID);
@@ -69,8 +65,6 @@ public class DriveSubsystem extends SubsystemBase {
         pigeon.setFusedHeading(0.0);
 
         odometer = new DifferentialDriveOdometry(new Rotation2d(), 0, 0);
-
-        shiftServo = new Servo(DriveConstants.SHIFT_SERVO);
 
     }
 
@@ -103,18 +97,6 @@ public class DriveSubsystem extends SubsystemBase {
         leftDrive.set(0);
         rightDrive.set(0);
     }
-
-    public double shiftUp() {
-        shiftServo.setAngle(180);
-        return shiftServo.getAngle();
-        
-    }
-
-    public double shiftDown() {
-        shiftServo.setAngle(0);
-        return shiftServo.getAngle();
-    }
-
 
     @Override
     public void periodic() {

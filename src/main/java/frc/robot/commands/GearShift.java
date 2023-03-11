@@ -1,31 +1,30 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.DriveSubsystem;
-import frc.robot.RobotContainer;
+import frc.robot.subsystems.GearShiftSubsystem;
 
 public class GearShift extends CommandBase {
 
-    private DriveSubsystem driveSubsystem;
+    private GearShiftSubsystem gearShiftSubsystem;
     private boolean shiftState;
     private double shiftAngle;
+    private String shiftDirection;
 
-
-    public GearShift(DriveSubsystem driveSubsystem) {
-        this.driveSubsystem = driveSubsystem;
-
-        addRequirements(driveSubsystem);
+    public GearShift(GearShiftSubsystem gearShiftSubsystem, String shiftDirection) {
+        this.gearShiftSubsystem = gearShiftSubsystem;
+        this.shiftDirection = shiftDirection;
+        addRequirements(gearShiftSubsystem);
     }
 
     @Override
     public void execute() {
 
-        if(RobotContainer.rightJoystick.getRawButton(1)) {
-            shiftAngle = driveSubsystem.shiftUp();
+        if(shiftDirection == "up") {
+            shiftAngle = gearShiftSubsystem.shiftUp();
             shiftState = true;
         }
-        else if(RobotContainer.leftJoystick.getRawButton(1)) { 
-            shiftAngle = driveSubsystem.shiftDown();
+        else if(shiftDirection == "down") { 
+            shiftAngle = gearShiftSubsystem.shiftDown();
             shiftState = false;
         }
     }
@@ -35,8 +34,8 @@ public class GearShift extends CommandBase {
         return ((shiftState && shiftAngle >= 150) || (!shiftState && shiftAngle <= 30));
     }
 
-    @Override
+/*     @Override
     public void end(boolean interrupted){
-        driveSubsystem.stop();
-    }
+
+    } */
 }
