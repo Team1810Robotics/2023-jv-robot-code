@@ -1,4 +1,4 @@
-package frc.robot.commands.auto.paths;
+/* package frc.robot.commands.auto.paths;
 
 import com.pathplanner.lib.commands.PPRamseteCommand;
 
@@ -16,3 +16,5 @@ public class AutoPath extends PPRamseteCommand{
 
     }
 }
+ */
+//TODO: If we are not using a pigeon, this and ScoreDock.java need to be revised

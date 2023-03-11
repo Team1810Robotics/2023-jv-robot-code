@@ -1,4 +1,4 @@
-package frc.robot.commands.auto.paths;
+/* package frc.robot.commands.auto.paths;
 
 import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -23,3 +23,4 @@ public class ScoreDock extends SequentialCommandGroup {
         );
     }
 }
+ */

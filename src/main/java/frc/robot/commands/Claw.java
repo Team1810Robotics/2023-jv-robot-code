@@ -3,11 +3,18 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClawSubsystem;
 
+
 public class Claw extends CommandBase {
 
     private ClawSubsystem clawSubsystem;
 
     private static boolean previous;
+
+    private static double startTime;
+
+    private static boolean clawReversed;
+
+    private static boolean finished;
 
     public Claw(ClawSubsystem clawSubsystem){
 
@@ -15,11 +22,16 @@ public class Claw extends CommandBase {
 
         previous = ClawSubsystem.clawLS.get();
 
+        clawReversed = false;
     }
 
     @Override
     public void execute(){
-        clawSubsystem.grab();
+        if (!clawReversed){
+            clawSubsystem.grab();
+        } else {
+            clawSubsystem.reverse();
+        }
     }
     /**This is Edge Detection, previous starts equal to whatever the LS reads, 
      * then changes to whatever current is after the cycle (current is updated 
@@ -28,16 +40,35 @@ public class Claw extends CommandBase {
      * the LS is not triggered, and current is true, meaning it was just triggered.*/
     @Override
     public boolean isFinished(){
-        boolean finished;
         boolean current = ClawSubsystem.clawLS.get();
-        if (!previous && current){
-            finished = true;
-        } else {
+        if(startTime == 0){
+            startTime = System.currentTimeMillis();
             finished = false;
         }
-        previous = current;
-        return finished;
-    }
+        else{
+            //Less than 2 seconds have elapsed
+            if (System.currentTimeMillis() - startTime < 2000){
+                //LS is now tripped, but wasn't currently
+                if (!previous && current){
+                    finished = true;
+                } else {
+                    finished = false;
+                }
+                //More than 2 seconds have elapsed
+            } else if (System.currentTimeMillis() - startTime >= 2000) {
+                    if (!current){
+                        clawReversed = true;
+                        finished = false;
+                    } else {
+                        startTime = 0;
+                        clawReversed = false;
+                        finished = true;
+                    }
+                }
+            }
+            previous = current;
+            return finished;
+        }
 
     @Override
     public void end(boolean interrupted){
