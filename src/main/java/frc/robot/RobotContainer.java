@@ -15,6 +15,7 @@ import frc.robot.commands.Claw;
 import frc.robot.commands.Extender;
 import frc.robot.commands.GearShift;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.Autonomous;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
@@ -79,6 +80,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return null;
+    Command autoCommand = new Autonomous(driveSubsystem, clawSubsystem, extenderSubsystem);
+    return autoCommand;
   }
 }
