@@ -12,8 +12,6 @@ public class Claw extends CommandBase {
 
     private static double startTime;
 
-    private static boolean clawReversed;
-
     private static boolean finished;
 
     public Claw(ClawSubsystem clawSubsystem){
@@ -22,16 +20,11 @@ public class Claw extends CommandBase {
 
         previous = ClawSubsystem.clawLS.get();
 
-        clawReversed = false;
     }
 
     @Override
     public void execute(){
-        if (!clawReversed){
-            clawSubsystem.grab();
-        } else {
-            clawSubsystem.reverse();
-        }
+        clawSubsystem.grab();
     }
     /**This is Edge Detection, previous starts equal to whatever the LS reads, 
      * then changes to whatever current is after the cycle (current is updated 
@@ -44,6 +37,7 @@ public class Claw extends CommandBase {
         if(startTime == 0){
             startTime = System.currentTimeMillis();
             finished = false;
+            return finished;
         }
         else{
             //Less than 2 seconds have elapsed
@@ -56,19 +50,13 @@ public class Claw extends CommandBase {
                 }
                 //More than 2 seconds have elapsed
             } else if (System.currentTimeMillis() - startTime >= 2000) {
-                    if (!current){
-                        clawReversed = true;
-                        finished = false;
-                    } else {
-                        startTime = 0;
-                        clawReversed = false;
-                        finished = true;
-                    }
-                }
+                    finished = true;
+                    startTime = 0;
             }
             previous = current;
             return finished;
         }
+    }
 
     @Override
     public void end(boolean interrupted){
