@@ -6,7 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -15,7 +17,7 @@ import frc.robot.commands.Claw;
 import frc.robot.commands.Extender;
 import frc.robot.commands.GearShift;
 import frc.robot.commands.TankDrive;
-import frc.robot.commands.auto.paths.ScoreDock;
+import frc.robot.commands.auto.Score;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
@@ -45,14 +47,20 @@ public class RobotContainer {
   public static final JoystickButton leftJoystickTrigger = new JoystickButton(leftJoystick, 1);
   public static final JoystickButton rightJoystickTrigger = new JoystickButton(leftJoystick, 1);
 
+  private final SendableChooser<Command> autoCommand = new SendableChooser<>();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveSubsystem.setDefaultCommand(
       new TankDrive(
-        () -> -leftJoystick.getY(), 
-        () -> -rightJoystick.getY(), 
+        () -> -leftJoystick.getY(),
+        () -> -rightJoystick.getY(),
         driveSubsystem)
     );
+
+    autoCommand.setDefaultOption("No Auto", new InstantCommand());
+    autoCommand.addOption("Score & Offline", new Score(extenderSubsystem, clawSubsystem, driveSubsystem));
+
     // Configure the trigger bindings
     configureBindings();
   }
@@ -80,6 +88,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return new ScoreDock(driveSubsystem, clawSubsystem, extenderSubsystem);
+   return autoCommand.getSelected();
   }
 }

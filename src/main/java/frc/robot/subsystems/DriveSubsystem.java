@@ -40,6 +40,11 @@ public class DriveSubsystem extends SubsystemBase {
         differentialDrive.tankDrive(leftSpeed, rightSpeed, true);
     }
 
+    public void sDrive(double leftSpeed, double rightSpeed){
+        leftDrive.set(leftSpeed);
+        rightDrive.set(rightSpeed);
+    }
+
     public void stop() {
         leftDrive.set(0);
         rightDrive.set(0);
