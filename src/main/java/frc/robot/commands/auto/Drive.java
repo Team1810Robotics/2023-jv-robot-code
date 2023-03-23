@@ -24,10 +24,9 @@ public class Drive extends CommandBase {
         addRequirements(driveSubsystem);
     }
 
-
     @Override
-    public void execute() {
-        driveSubsystem.sDrive(rightSpeed, leftSpeed);
+    public void execute(){
+        driveSubsystem.drive(leftSpeed, rightSpeed);
     }
 
     @Override

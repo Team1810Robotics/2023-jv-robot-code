@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
@@ -18,8 +19,6 @@ public class DriveSubsystem extends SubsystemBase {
     private MotorControllerGroup rightDrive;
     private MotorControllerGroup leftDrive;
 
-    private DifferentialDrive differentialDrive;
-
     public DriveSubsystem() {
         frontLeftMotor = new PWMSparkMax(DriveConstants.FRONT_LEFT_MOTOR_ID);
         frontRightMotor = new PWMSparkMax(DriveConstants.FRONT_RIGHT_MOTOR_ID);
@@ -32,17 +31,16 @@ public class DriveSubsystem extends SubsystemBase {
 
         rightDrive = new MotorControllerGroup(frontRightMotor, backRightMotor);
         rightDrive.setInverted(DriveConstants.RIGHT_INVERTED);
-
-        differentialDrive = new DifferentialDrive(leftDrive, rightDrive);
     }
 
     public void drive(double leftSpeed, double rightSpeed) {
-        differentialDrive.tankDrive(leftSpeed, rightSpeed, true);
-    }
+        leftSpeed = MathUtil.applyDeadband(leftSpeed, 0.02);
+        rightSpeed = MathUtil.applyDeadband(rightSpeed, 0.02);
 
-    public void sDrive(double leftSpeed, double rightSpeed){
-        leftDrive.set(leftSpeed);
-        rightDrive.set(rightSpeed);
+        var speeds = DifferentialDrive.tankDriveIK(leftSpeed, rightSpeed, true);
+
+        leftDrive.set(speeds.left);
+        rightDrive.set(speeds.right);
     }
 
     public void stop() {

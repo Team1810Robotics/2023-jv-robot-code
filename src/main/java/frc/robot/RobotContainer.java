@@ -6,7 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -17,7 +19,8 @@ import frc.robot.commands.Claw;
 import frc.robot.commands.Extender;
 import frc.robot.commands.GearShift;
 import frc.robot.commands.TankDrive;
-import frc.robot.commands.auto.Score;
+import frc.robot.commands.auto.ScoreOffline;
+import frc.robot.commands.auto.ScoreOverDockOffline;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
@@ -47,7 +50,7 @@ public class RobotContainer {
   public static final JoystickButton leftJoystickTrigger = new JoystickButton(leftJoystick, 1);
   public static final JoystickButton rightJoystickTrigger = new JoystickButton(leftJoystick, 1);
 
-  private final SendableChooser<Command> autoCommand = new SendableChooser<>();
+  private SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -58,8 +61,10 @@ public class RobotContainer {
         driveSubsystem)
     );
 
-    autoCommand.setDefaultOption("No Auto", new InstantCommand());
-    autoCommand.addOption("Score & Offline", new Score(extenderSubsystem, clawSubsystem, driveSubsystem));
+    autoChooser.setDefaultOption("No Auto", new InstantCommand());
+    autoChooser.addOption("Offline", new ScoreOffline(extenderSubsystem, clawSubsystem, driveSubsystem));
+    autoChooser.addOption("Over Dock Offline", new ScoreOverDockOffline(extenderSubsystem, clawSubsystem, driveSubsystem));
+    Shuffleboard.getTab("Auto").add("Auto Chooser", autoChooser);
 
     // Configure the trigger bindings
     configureBindings();
@@ -77,7 +82,7 @@ public class RobotContainer {
   private void configureBindings() {
     manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem));
     manipulatorXbox_RB.onTrue(new Claw(clawSubsystem));
-    rightJoystickTrigger.onTrue(new GearShift(gearShiftSubsystem, "up")); //TODO: Joysticks?
+    rightJoystickTrigger.onTrue(new GearShift(gearShiftSubsystem, "up"));
     leftJoystickTrigger.onTrue(new GearShift(gearShiftSubsystem, "down"));
 
   }
@@ -88,6 +93,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-   return autoCommand.getSelected();
+   return new ScoreOverDockOffline(extenderSubsystem, clawSubsystem, driveSubsystem);
   }
 }
