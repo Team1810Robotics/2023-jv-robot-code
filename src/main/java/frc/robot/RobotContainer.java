@@ -47,8 +47,7 @@ public class RobotContainer {
 
   private final JoystickButton manipulatorXbox_LB = new JoystickButton(manipulatorController, 5);
   private final JoystickButton manipulatorXbox_RB = new JoystickButton(manipulatorController, 6);
-  public static final JoystickButton leftJoystickTrigger = new JoystickButton(leftJoystick, 1);
-  public static final JoystickButton rightJoystickTrigger = new JoystickButton(leftJoystick, 1);
+  public static final JoystickButton rightJoystick_11 = new JoystickButton(rightJoystick, 11);
 
   private SendableChooser<Command> autoChooser = new SendableChooser<>();
 
@@ -82,9 +81,8 @@ public class RobotContainer {
   private void configureBindings() {
     manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem));
     manipulatorXbox_RB.onTrue(new Claw(clawSubsystem));
-    rightJoystickTrigger.onTrue(new GearShift(gearShiftSubsystem, "up"));
-    leftJoystickTrigger.onTrue(new GearShift(gearShiftSubsystem, "down"));
-
+    rightJoystick_11.whileTrue(new GearShift(gearShiftSubsystem, "down"))
+                    .whileFalse(new GearShift(gearShiftSubsystem, "up"));
   }
 
   /**
