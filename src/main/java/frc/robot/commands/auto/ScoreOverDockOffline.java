@@ -16,7 +16,7 @@ public class ScoreOverDockOffline extends SequentialCommandGroup {
                     new WaitCommand(0.5),
 
                     // drive back
-                    new Drive(-0.75, -0.75, driveSubsystem, 4.75),
+                    new Balance(-0.75, -0.75, 4.75, 0.5, driveSubsystem),
 
                     // reset claw
                     new Claw(clawSubsystem),
