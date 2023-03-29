@@ -3,6 +3,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClawSubsystem;
 
+
 public class Claw extends CommandBase {
 
     private ClawSubsystem clawSubsystem;
@@ -27,7 +28,7 @@ public class Claw extends CommandBase {
      * will not stop until it reaches the cycle where previous is false, meaning
      * the LS is not triggered, and current is true, meaning it was just triggered.*/
     @Override
-    public boolean isFinished(){
+    public boolean isFinished() {
         boolean finished;
         boolean current = ClawSubsystem.clawLS.get();
         if (!previous && current){

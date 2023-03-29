@@ -13,14 +13,13 @@ public class GearShiftSubsystem extends SubsystemBase{
     }
 
     public double shiftUp() {
-        shiftServo.setAngle(180);
+        shiftServo.setAngle(160);
         return shiftServo.getAngle();
-        
     }
-    
+
     public double shiftDown() {
-        shiftServo.setAngle(0);
+        shiftServo.setAngle(20);
         return shiftServo.getAngle();
-    }    
+    }
 
 }

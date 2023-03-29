@@ -13,17 +13,19 @@ public class GearShift extends CommandBase {
     public GearShift(GearShiftSubsystem gearShiftSubsystem, String shiftDirection) {
         this.gearShiftSubsystem = gearShiftSubsystem;
         this.shiftDirection = shiftDirection;
+
         addRequirements(gearShiftSubsystem);
     }
 
     @Override
     public void execute() {
 
-        if(shiftDirection == "up") {
+        System.out.println(shiftDirection);
+
+        if (shiftDirection.equals("up")) {
             shiftAngle = gearShiftSubsystem.shiftUp();
             shiftState = true;
-        }
-        else if(shiftDirection == "down") { 
+        } else if (shiftDirection.equals("down")) {
             shiftAngle = gearShiftSubsystem.shiftDown();
             shiftState = false;
         }
@@ -31,7 +33,7 @@ public class GearShift extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return ((shiftState && shiftAngle >= 150) || (!shiftState && shiftAngle <= 30));
+        return false;// ((shiftState && shiftAngle >= 150) || (!shiftState && shiftAngle <= 30));
     }
 
 /*     @Override

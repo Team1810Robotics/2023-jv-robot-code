@@ -14,7 +14,11 @@ public class ClawSubsystem extends SubsystemBase {
         clawLS = new DigitalInput(ArmConstants.CLAW_LS);
     }
     public void grab() {
-        claw.set(0.75);
+        claw.set(1.0);
+    }
+
+    public void reverse() {
+        claw.set(-1.0);
     }
 
     public void stop() {
