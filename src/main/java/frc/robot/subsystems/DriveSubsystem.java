@@ -1,10 +1,12 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.math.MathUtil;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.commands.auto.Drive;
 
 import static frc.robot.Constants.*;
 
@@ -19,6 +21,8 @@ public class DriveSubsystem extends SubsystemBase {
     private MotorControllerGroup rightDrive;
     private MotorControllerGroup leftDrive;
 
+    public static DigitalInput balanceSwitch;
+
     public DriveSubsystem() {
         frontLeftMotor = new PWMSparkMax(DriveConstants.FRONT_LEFT_MOTOR_ID);
         frontRightMotor = new PWMSparkMax(DriveConstants.FRONT_RIGHT_MOTOR_ID);
@@ -31,6 +35,8 @@ public class DriveSubsystem extends SubsystemBase {
 
         rightDrive = new MotorControllerGroup(frontRightMotor, backRightMotor);
         rightDrive.setInverted(DriveConstants.RIGHT_INVERTED);
+
+        balanceSwitch = new DigitalInput(DriveConstants.BALANCE_SWITCH); //TODO: Assign value.
     }
 
     public void drive(double leftSpeed, double rightSpeed) {
