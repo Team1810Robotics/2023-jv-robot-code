@@ -6,8 +6,6 @@ import frc.robot.subsystems.GearShiftSubsystem;
 public class GearShift extends CommandBase {
 
     private GearShiftSubsystem gearShiftSubsystem;
-    private boolean shiftState;
-    private double shiftAngle;
     private String shiftDirection;
 
     public GearShift(GearShiftSubsystem gearShiftSubsystem, String shiftDirection) {
@@ -23,11 +21,9 @@ public class GearShift extends CommandBase {
         System.out.println(shiftDirection);
 
         if (shiftDirection.equals("up")) {
-            shiftAngle = gearShiftSubsystem.shiftUp();
-            shiftState = true;
+            gearShiftSubsystem.shiftUp();
         } else if (shiftDirection.equals("down")) {
-            shiftAngle = gearShiftSubsystem.shiftDown();
-            shiftState = false;
+            gearShiftSubsystem.shiftDown();
         }
     }
 

@@ -61,8 +61,8 @@ public class RobotContainer {
     );
 
     autoChooser.setDefaultOption("No Auto", new InstantCommand());
-    autoChooser.addOption("Offline", new ScoreOffline(extenderSubsystem, clawSubsystem, driveSubsystem));
-    autoChooser.addOption("Over Dock Offline", new ScoreOverDockOffline(extenderSubsystem, clawSubsystem, driveSubsystem));
+    autoChooser.addOption("Offline", new ScoreOffline(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
+    autoChooser.addOption("Over Dock Offline", new ScoreOverDockOffline(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
     Shuffleboard.getTab("Auto").add("Auto Chooser", autoChooser);
 
     // Configure the trigger bindings
@@ -91,6 +91,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-   return new ScoreOverDockOffline(extenderSubsystem, clawSubsystem, driveSubsystem);
+   return new ScoreOverDockOffline(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem);
   }
 }

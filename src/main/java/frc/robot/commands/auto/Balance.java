@@ -34,7 +34,7 @@ public class Balance extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        if (Timer.getFPGATimestamp() - startTime >= balanceDelay && !DriveSubsystem.balanceSwitch.get()) {
+        if (Timer.getFPGATimestamp() - startTime >= balanceDelay && DriveSubsystem.balanceSwitch.get()) {
             return true;
         } else if (Timer.getFPGATimestamp() - startTime >= forceQuitTime) {
             return true;
