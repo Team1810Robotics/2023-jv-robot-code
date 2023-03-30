@@ -2,6 +2,7 @@ package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class Balance extends CommandBase {
@@ -40,11 +41,15 @@ public class Balance extends CommandBase {
         boolean finished;
         boolean current = DriveSubsystem.balanceSwitch.get();
         if (previous && !current){
+            Timer.delay(.3);
             finished = true;
         } else {
             finished = false;
         }
         previous = current;
         return finished;
+    }
+
+    private void WaitCommand(double d) {
     }
 }
