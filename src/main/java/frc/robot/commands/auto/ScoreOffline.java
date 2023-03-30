@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Claw;
 import frc.robot.commands.Extender;
-import frc.robot.commands.GearShift;
+//import frc.robot.commands.GearShift;
 import frc.robot.subsystems.GearShiftSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.DriveSubsystem;

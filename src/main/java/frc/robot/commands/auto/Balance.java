@@ -13,6 +13,8 @@ public class Balance extends CommandBase {
     public double forceQuitTime;
     public double startTime;
 
+    public boolean previous;
+
     public DriveSubsystem driveSubsystem;
 
     public Balance(double leftSpeed, double rightSpeed, double forceQuitTime, double balanceDelay, DriveSubsystem driveSubsystem) {
@@ -21,6 +23,8 @@ public class Balance extends CommandBase {
         this.forceQuitTime = forceQuitTime;
         this.balanceDelay = balanceDelay;
         this.driveSubsystem = driveSubsystem;
+
+        previous = DriveSubsystem.balanceSwitch.get();
 
         this.startTime = Timer.getFPGATimestamp();
         
@@ -32,14 +36,15 @@ public class Balance extends CommandBase {
         driveSubsystem.drive(leftSpeed, rightSpeed);
     }
 
-    @Override
-    public boolean isFinished() {
-        if (Timer.getFPGATimestamp() - startTime >= balanceDelay && DriveSubsystem.balanceSwitch.get()) {
-            return true;
-        } else if (Timer.getFPGATimestamp() - startTime >= forceQuitTime) {
-            return true;
+    public boolean isFinished(){
+        boolean finished;
+        boolean current = DriveSubsystem.balanceSwitch.get();
+        if (previous && !current){
+            finished = true;
         } else {
-            return true;
+            finished = false;
         }
+        previous = current;
+        return finished;
     }
 }
