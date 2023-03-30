@@ -21,9 +21,9 @@ public class GearShift extends CommandBase {
         System.out.println(shiftDirection);
 
         if (shiftDirection.equals("up")) {
-            gearShiftSubsystem.shiftUp();
-        } else if (shiftDirection.equals("down")) {
             gearShiftSubsystem.shiftDown();
+        } else if (shiftDirection.equals("down")) {
+            gearShiftSubsystem.shiftUp();
         }
     }
 

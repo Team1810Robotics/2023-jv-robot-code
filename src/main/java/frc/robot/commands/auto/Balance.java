@@ -40,8 +40,8 @@ public class Balance extends CommandBase {
     public boolean isFinished(){
         boolean finished;
         boolean current = DriveSubsystem.balanceSwitch.get();
-        if (previous && !current){
-            Timer.delay(.3);
+        if (!previous && current){
+            Timer.delay(.35);
             finished = true;
         } else {
             finished = false;
