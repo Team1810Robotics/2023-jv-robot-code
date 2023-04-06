@@ -20,7 +20,8 @@ import frc.robot.commands.Extender;
 import frc.robot.commands.GearShift;
 import frc.robot.commands.TankDrive;
 import frc.robot.commands.auto.ScoreOffline;
-import frc.robot.commands.auto.ScoreOverDockOffline;
+import frc.robot.commands.auto.Score;
+//import frc.robot.commands.auto.ScoreBalance;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
@@ -60,9 +61,9 @@ public class RobotContainer {
         driveSubsystem)
     );
 
-    autoChooser.setDefaultOption("No Auto", new InstantCommand());
-    autoChooser.addOption("Offline", new ScoreOffline(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
-    autoChooser.addOption("Over Dock Offline", new ScoreOverDockOffline(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
+    autoChooser.setDefaultOption("No Auto", new InstantCommand());  
+    autoChooser.addOption("ScoreOffline", new ScoreOffline(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
+    autoChooser.addOption("Score", new Score(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
     Shuffleboard.getTab("Auto").add("Auto Chooser", autoChooser);
 
     // Configure the trigger bindings
@@ -80,7 +81,7 @@ public class RobotContainer {
    */
   private void configureBindings() {
     manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem));
-    manipulatorXbox_RB.onTrue(new Claw(clawSubsystem));
+    manipulatorXbox_RB.onTrue(new Claw(clawSubsystem).withTimeout(2.0));
     rightJoystick_11.whileTrue(new GearShift(gearShiftSubsystem, "down"))
                     .whileFalse(new GearShift(gearShiftSubsystem, "up"));
   }
@@ -91,6 +92,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-   return new ScoreOverDockOffline(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem);
+   return autoChooser.getSelected();
   }
 }

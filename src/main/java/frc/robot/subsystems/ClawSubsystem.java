@@ -2,16 +2,21 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
 
 public class ClawSubsystem extends SubsystemBase {
     public static Spark claw;
     public static DigitalInput clawLS;
+
     
+
     public ClawSubsystem() {
         claw = new Spark(ArmConstants.CLAW_RELAY);
         clawLS = new DigitalInput(ArmConstants.CLAW_LS);
+
+        Shuffleboard.getTab("Extender").addBoolean("clawLS", this::getLS); 
     }
     public void grab() {
         claw.set(1.0);
@@ -23,5 +28,9 @@ public class ClawSubsystem extends SubsystemBase {
 
     public void stop() {
         claw.set(0);
+    }
+
+    public boolean getLS() {
+        return clawLS.get();
     }
 }

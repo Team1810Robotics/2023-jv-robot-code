@@ -10,20 +10,22 @@ import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
 
-public class ScoreOverDockOffline extends SequentialCommandGroup {
-    public ScoreOverDockOffline(ExtenderSubsystem extenderSubsystem, ClawSubsystem clawSubsystem, DriveSubsystem driveSubsystem, GearShiftSubsystem gearShiftSubsystem) {
+public class Score extends SequentialCommandGroup {
+    public Score(ExtenderSubsystem extenderSubsystem, ClawSubsystem clawSubsystem, DriveSubsystem driveSubsystem, GearShiftSubsystem gearShiftSubsystem) {
                     // drop cube
-        addCommands(//new Extender(extenderSubsystem),
-                    //new Claw(clawSubsystem),
+        addCommands(new Extender(extenderSubsystem),
+                    new Claw(clawSubsystem),
                     new WaitCommand(0.5),
 
                     // drive back
-                    new Balance(-0.6, -0.6, 2.0, 0.01, driveSubsystem)
+                    // driveSubsystem.balance()
+                    //new Balance(-0.6, -0.6, 4.0, 2.0, driveSubsystem),
                     //new WaitCommand(3.0)
 
                     // reset claw
-                    //new Claw(clawSubsystem),
-                    //new Extender(extenderSubsystem)
+                    new Extender(extenderSubsystem)
+                    //new Claw(clawSubsystem)
+
                     );
     }
 }

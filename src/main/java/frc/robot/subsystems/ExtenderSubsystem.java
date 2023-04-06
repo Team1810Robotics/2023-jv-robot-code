@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -12,11 +13,13 @@ import static frc.robot.Constants.*;
 public class ExtenderSubsystem extends SubsystemBase{
 
     public static Relay extender;
-    public static DigitalInput extenderLS;
+    private static DigitalInput extenderLS;
 
     public ExtenderSubsystem() {
         extender = new Relay(ArmConstants.EXTENDER_RELAY);
         extenderLS = new DigitalInput(ArmConstants.EXTENDER_LS);
+
+        Shuffleboard.getTab("Extender").addBoolean("ExtenderLS", this::getLS);
     }
 
     public void extend() {
@@ -25,5 +28,9 @@ public class ExtenderSubsystem extends SubsystemBase{
 
     public void stop(){
         extender.stopMotor();
+    }
+
+    public boolean getLS() {
+        return extenderLS.get();
     }
 }

@@ -5,8 +5,13 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 //import frc.robot.commands.auto.Drive;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.auto.Balance;
 
 import static frc.robot.Constants.*;
 
@@ -52,5 +57,15 @@ public class DriveSubsystem extends SubsystemBase {
     public void stop() {
         leftDrive.set(0);
         rightDrive.set(0);
+    }
+
+    public Command balance() {
+        return Commands.race(
+                    Commands.sequence(
+                        Commands.run(() -> new Balance(-0.6, -0.6, 10.0, 0.01, this), this)
+                            .alongWith(new PrintCommand("Thing"))),
+
+                    Commands.run(() -> new WaitCommand(15))
+        );
     }
 }

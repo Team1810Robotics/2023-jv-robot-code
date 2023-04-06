@@ -13,7 +13,7 @@ public class Extender extends CommandBase {
 
         this.extenderSubsystem = extenderSubsystem;
 
-        previous = ExtenderSubsystem.extenderLS.get();
+        previous = extenderSubsystem.getLS();
 
     }
 
@@ -29,7 +29,7 @@ public class Extender extends CommandBase {
     @Override
     public boolean isFinished(){
         boolean finished;
-        boolean current = ExtenderSubsystem.extenderLS.get();
+        boolean current = extenderSubsystem.getLS();
         if (!previous && current){
             finished = true;
         } else {

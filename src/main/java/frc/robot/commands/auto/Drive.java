@@ -2,6 +2,7 @@ package frc.robot.commands.auto;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+//import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveSubsystem;
 
 public class Drive extends CommandBase {
@@ -29,10 +30,10 @@ public class Drive extends CommandBase {
         driveSubsystem.drive(leftSpeed, rightSpeed);
     }
 
-    @Override
+    /* @Override
     public boolean isFinished(){
-        return (Timer.getFPGATimestamp() - startTime) >= runTimeSec;
-    }
+        return ((Timer.getFPGATimestamp() - startTime) >= runTimeSec);
+    } */
 
     @Override
     public void end(boolean interrupted){
