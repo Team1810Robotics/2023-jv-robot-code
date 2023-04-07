@@ -1,8 +1,13 @@
 package frc.robot;
 
+import org.photonvision.PhotonCamera;
+
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.DriveSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -21,8 +26,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    var camera = new PhotonCamera("Microsoft");
+    camera.setDriverMode(true);
+    Shuffleboard.getTab("cam").addCamera("Camera", "Microsoft", "http://10.93.16.93:1182/stream.mjpg?1678757771307");
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
+    Shuffleboard.getTab("balance").addBoolean("Balance Switch", () -> DriveSubsystem.balanceSwitch.get());
     m_robotContainer = new RobotContainer();
   }
 

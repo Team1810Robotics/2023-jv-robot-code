@@ -31,19 +31,22 @@ public final class Constants {
     public static final int BACK_RIGHT_MOTOR_ID =    3;
     public static final boolean RIGHT_INVERTED =     false;
 
-    public static final int PIGEON = 4;
+    public static final int BALANCE_SWITCH = 4;
 
     public static final double DEADBAND = 0.05;
 
     public static final double POSITIVE_TRIM = 0;
     public static final double NEGATIVE_TRIM = 0;
+
+    public static final int SHIFT_SERVO = 6;
+
   }
 
   public static class ArmConstants {
     public static final int EXTENDER_RELAY = 1; 
     public static final int EXTENDER_LS = 1;
 
-    public static final int CLAW_RELAY = 2;
+    public static final int CLAW_RELAY = 5;
     public static final int CLAW_LS = 0;
   }
 }

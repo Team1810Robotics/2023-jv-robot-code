@@ -6,17 +6,27 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Claw;
 import frc.robot.commands.Extender;
+import frc.robot.commands.GearShift;
 import frc.robot.commands.TankDrive;
+import frc.robot.commands.auto.ScoreOffline;
+import frc.robot.commands.auto.Score;
+//import frc.robot.commands.auto.ScoreBalance;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
 import frc.robot.subsystems.ClawSubsystem;
+import frc.robot.subsystems.GearShiftSubsystem;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,23 +39,33 @@ public class RobotContainer {
   private DriveSubsystem driveSubsystem = new DriveSubsystem();
   private ExtenderSubsystem extenderSubsystem = new ExtenderSubsystem();
   private ClawSubsystem clawSubsystem = new ClawSubsystem();
+  private GearShiftSubsystem gearShiftSubsystem = new GearShiftSubsystem();
 
   private final XboxController manipulatorController = new XboxController(OperatorConstants.MANIPULATOR_CONTROLLER_PORT);
 
-  private Joystick leftJoystick = new Joystick(OperatorConstants.LEFT_JOYSTICK_PORT);
-  private Joystick rightJoystick = new Joystick(OperatorConstants.RIGHT_JOYSTICK_PORT);
+  public static Joystick leftJoystick = new Joystick(OperatorConstants.LEFT_JOYSTICK_PORT);
+  public static Joystick rightJoystick = new Joystick(OperatorConstants.RIGHT_JOYSTICK_PORT);
 
   private final JoystickButton manipulatorXbox_LB = new JoystickButton(manipulatorController, 5);
   private final JoystickButton manipulatorXbox_RB = new JoystickButton(manipulatorController, 6);
-  
+  public static final JoystickButton rightJoystick_11 = new JoystickButton(rightJoystick, 11);
+
+  private SendableChooser<Command> autoChooser = new SendableChooser<>();
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveSubsystem.setDefaultCommand(
       new TankDrive(
-        () -> -leftJoystick.getY(), 
-        () -> -rightJoystick.getY(), 
+        () -> -leftJoystick.getY(),
+        () -> -rightJoystick.getY(),
         driveSubsystem)
     );
+
+    autoChooser.setDefaultOption("No Auto", new InstantCommand());  
+    autoChooser.addOption("ScoreOffline", new ScoreOffline(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
+    autoChooser.addOption("Score", new Score(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
+    Shuffleboard.getTab("Auto").add("Auto Chooser", autoChooser);
+
     // Configure the trigger bindings
     configureBindings();
   }
@@ -61,7 +81,9 @@ public class RobotContainer {
    */
   private void configureBindings() {
     manipulatorXbox_LB.onTrue(new Extender(extenderSubsystem));
-    manipulatorXbox_RB.onTrue(new Claw(clawSubsystem));
+    manipulatorXbox_RB.onTrue(new Claw(clawSubsystem).withTimeout(2.0));
+    rightJoystick_11.whileTrue(new GearShift(gearShiftSubsystem, "down"))
+                    .whileFalse(new GearShift(gearShiftSubsystem, "up"));
   }
 
   /**
@@ -70,6 +92,6 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return null;
+   return autoChooser.getSelected();
   }
 }
