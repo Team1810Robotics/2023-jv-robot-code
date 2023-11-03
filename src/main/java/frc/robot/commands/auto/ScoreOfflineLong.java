@@ -12,15 +12,15 @@ import frc.robot.subsystems.ClawSubsystem;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
 
-public class ScoreOffline extends SequentialCommandGroup {
-    public ScoreOffline(ExtenderSubsystem extenderSubsystem, ClawSubsystem clawSubsystem, DriveSubsystem driveSubsystem, GearShiftSubsystem gearShiftSubsystem) {
+public class ScoreOfflineLong extends SequentialCommandGroup {
+    public ScoreOfflineLong(ExtenderSubsystem extenderSubsystem, ClawSubsystem clawSubsystem, DriveSubsystem driveSubsystem, GearShiftSubsystem gearShiftSubsystem) {
                     // drop cube
         addCommands(new Extender(extenderSubsystem),
                     new Claw(clawSubsystem),
                     new WaitCommand(0.5),
 
                     // drive back
-                    new Drive(-0.50, -0.50, driveSubsystem, 3.0).withTimeout(2.6),
+                    new Drive(-0.50, -0.50, driveSubsystem, 3.0).withTimeout(3.2),
                     new Drive(0, 0, driveSubsystem, 0),
                     //new WaitCommand(3.0),
 

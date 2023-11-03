@@ -1,6 +1,6 @@
 package frc.robot.commands.auto;
 
-import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.subsystems.DriveSubsystem;
@@ -11,16 +11,16 @@ public class Drive extends CommandBase {
 
     private double leftSpeed;
     private double rightSpeed;
-    private double runTimeSec;
-    private double startTime;
+    //private double runTimeSec;
+    //private double startTime;
 
     public Drive(double leftSpeed, double rightSpeed, DriveSubsystem driveSubsystem, double runTimeSec) {
         this.leftSpeed = leftSpeed;
         this.rightSpeed = rightSpeed;
-        this.runTimeSec = runTimeSec;
+        //this.runTimeSec = runTimeSec;
         this.driveSubsystem = driveSubsystem;
 
-        this.startTime = Timer.getFPGATimestamp();
+        //this.startTime = Timer.getFPGATimestamp();
 
         addRequirements(driveSubsystem);
     }

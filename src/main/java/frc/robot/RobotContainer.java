@@ -19,8 +19,9 @@ import frc.robot.commands.Claw;
 import frc.robot.commands.Extender;
 import frc.robot.commands.GearShift;
 import frc.robot.commands.TankDrive;
-import frc.robot.commands.auto.ScoreOffline;
+import frc.robot.commands.auto.ScoreOfflineShort;
 import frc.robot.commands.auto.Score;
+import frc.robot.commands.auto.ScoreOfflineLong;
 //import frc.robot.commands.auto.ScoreBalance;
 import frc.robot.subsystems.DriveSubsystem;
 import frc.robot.subsystems.ExtenderSubsystem;
@@ -62,7 +63,8 @@ public class RobotContainer {
     );
 
     autoChooser.setDefaultOption("No Auto", new InstantCommand());  
-    autoChooser.addOption("ScoreOffline", new ScoreOffline(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
+    autoChooser.addOption("ScoreOfflineShort", new ScoreOfflineShort(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
+    autoChooser.addOption("ScoreOfflineLong", new ScoreOfflineLong(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
     autoChooser.addOption("Score", new Score(extenderSubsystem, clawSubsystem, driveSubsystem, gearShiftSubsystem));
     Shuffleboard.getTab("Auto").add("Auto Chooser", autoChooser);
 

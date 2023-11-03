@@ -1,6 +1,6 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
+//import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ClawSubsystem;
 
@@ -11,7 +11,7 @@ public class Claw extends CommandBase {
 
     private static boolean previous;
 
-    private static double startTime;
+    //private static double startTime;
 
     public Claw(ClawSubsystem clawSubsystem){
 
@@ -19,7 +19,7 @@ public class Claw extends CommandBase {
 
         previous = ClawSubsystem.clawLS.get();
 
-        startTime = Timer.getFPGATimestamp();
+        //startTime = Timer.getFPGATimestamp();
 
     }
 

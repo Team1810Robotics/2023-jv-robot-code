@@ -1,7 +1,8 @@
 package frc.robot;
 
-import org.photonvision.PhotonCamera;
-
+//import edu.wpi.first.cameraserver.CameraServer;
+//import edu.wpi.first.cscore.CvSink;
+//import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 //import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -26,14 +27,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    var camera = new PhotonCamera("Microsoft");
-    camera.setDriverMode(true);
-    Shuffleboard.getTab("cam").addCamera("Camera", "Microsoft", "http://10.93.16.93:1182/stream.mjpg?1678757771307");
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     Shuffleboard.getTab("balance").addBoolean("Balance Switch", () -> DriveSubsystem.balanceSwitch.get());
     m_robotContainer = new RobotContainer();
-  }
+  };
 
   /**
    * This function is called every 20 ms, no matter the mode. Use this for items like diagnostics
